@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+{% block title %}{{ data.name }}{% endblock %}
+{% block content %}
+ <!-- <h1>{{ data.name }}</h1> -->
+<div class="row" style="margin:60px 0 20px 0;">
+	<div class="card card-block col-10 offset-1">
+		<div class="card-header text-center">{{data.name | upper}}</div>
+		<div class="card-text col-12">
+			<span class="text-center col-12 "><h5>DETAILS<h5></span>
+			<div class="row col-12">
+				<span class="badge text-center col-3 badge-primary">KNEC CODE: {{data.knecCode }}</span>
+				<span class="badge text-center col-3 badge-primary">ENROLLMENT: {{data.enrollment}}</span>
+				<span class="badge text-center col-3 badge-primary">STREAMS: {{data.streams}}</span>
+				<span class="badge text-center col-3 badge-primary">TYPE : {{data.sType}}</span>
+			</div>
+		<!-- </hr style="size: 2px"> -->
+			
+			<div class="row col-12">
+				
+				<div class="row justify-content-start col-6">
+					<span class="text-center col-12 "><h5>PRINCIPLE DETAILS<h5></span>
+					<!-- principle details -->
+					<ul class="text-justify list-group">
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Name</span> : {{data.principle.username}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Tsc No.</span> : {{data.principle.tsc | lower}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Tel No.</span> : {{data.principle.telNo}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Email</span> : {{data.principle.email | lower}}</li>
+					</ul>
+				</div>
+				
+				<div class="row justify-content-end col-6">
+					<span class="text-center col-12"><h5>CATEGORY DETAILS<h5></span>
+					<ul class="text-justify list-group col-12 col align-self-end">
+						<!-- category details -->
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Name</span> : {{data.category.name}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">ID</span> : {{data.category.id | lower}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Description</span> : {{data.category.description | lower}}</li>
+					</ul>
+				</div>
+				
+			</div>
+			
+			
+			<div class="row col-12">
+				<div class="row justify-content-start col-6">
+					<!-- status details -->
+					<span class="text-center col-12 "><h5>TYPE DETAILS<h5></span>
+					<ul class="list-group text-justify col-12 col align-self-start">
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">ID</span> :{{data.status.id}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Name</span> :{{data.status.name }}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Description</span> :{{data.status.description | lower}}</li>
+					</ul>
+				</div>
+				<div class="row justify-content-end col-6">
+					<!-- subcount details -->
+					<span class="text-center col-12 "><h5>SUBCOUNTY DETAILS</h5></span>
+					<ul class="list-group text-justify col-12 col align-self-end">
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">ID</span> : {{data.subCounty.id}}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Name</span> : {{data.subCounty.name }}</li>
+						<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Code</span> : {{data.subCounty.code}}</li>
+					</ul>
+
+				</div>
+			</div>
+			
+			<div class="row justify-content-center col-12 card">
+				<span class="text-center col-12 "><h5>CAPACITY DETAILS</h5></span>
+				<table class="table table-hover card-block col-md-10 offset-1 table-striped table-bordered table-sm">
+					<thead class="thead-dark">
+						<th scope="col" >#</th>
+						<th scope="col">Year</th>
+						<th scope="col">Gender</th>
+						<th scope="col">Number</th>
+					</thead>
+					<tbody>
+						<!-- capacity details -->
+						{% for item in capacity%}
+						<tr>
+							<th scope="row">{{item.id}}</th>
+							<td>{{item.year}}</span>
+							<td>{{item.gender}}</span>
+							<td>{{item.amount}}</span>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

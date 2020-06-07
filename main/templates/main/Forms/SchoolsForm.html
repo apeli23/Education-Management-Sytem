@@ -1,0 +1,32 @@
+{% extends "main/base.html" %}
+{% block title %}School New{% endblock %}
+{% block content %}
+ <div class="row" style="margin-top: 60px">
+ 	<div class="card card-block col-md-6 offset-3">
+	 {% if Status %}
+	 <span class="alert alert-success alert-dismissible fade show" role="alert">
+	 	{{ Message }}
+	 	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+	 </span>
+		 {% else %}
+		 <span class="alert alert-danger alert-dismissible fade show" role="alert">
+		 	{{Message}}
+		 	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+		 </span>
+		 <form action="." method="post">
+			 {{ form.as_p }}
+			 {% csrf_token %}
+ 			<div class="row justify-content-center col-12">
+			 	<input type="submit" value="Save" class="btn btn-info col-4">
+			</div>
+		 </form>
+	 {% endif %}
+	</div>
+</div>
+{% endblock %}
+
+

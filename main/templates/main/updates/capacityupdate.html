@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+<div class="row card col-6 offset-3" style="margin-top:60px">
+	<form method="POST" action="/capacity/update/{{data.id}}" novalidate>
+		{% csrf_token %}
+		<div class="card-header col-12 text-center">
+			{{school.name | upper}} CAPACITY EDIT
+			
+		</div>
+		<p>
+			<select name="school" class="form-control" id="school" disabled>
+				<option value="{{school.id}}" selected>{{school.name}}</option>
+			</select>
+		</p>
+		<p>
+			<select name="gender" class="form-control" id="gender">
+				{% for k,v in genderlist %}
+					{% if data.gender == k %}
+						<option value='{{v}}' selected>{{v}}</option>
+					{% else %}
+						<option value='{{k}}'>{{v}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</p>
+		<p>
+			<input type="text" name="year" class="disabled form-control" disabled placeholder="Year" value="{{ data.year }}">
+		</p>
+		<p>
+			<input type="text" name="amount" placeholder="Amount" class="form-control" value="{{ data.amount }}">
+		</p>
+		<div class="card-footer">
+			<button type="submit" class="btn btn-outline-primary col-5">Update</button><a class="btn btn-outline-primary col-5" href="/capacity/list/{{school.id}}">Close</a>
+		</div>
+	</form>
+	
+</div>
+{% endblock %}

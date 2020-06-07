@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% block title %}Principle new{% endblock %}
+{% block content %}
+ <div class="row" style="margin-top: 60px">
+ 	<div class="card card-block col-md-6 offset-3">
+	 {% if Status %}
+		 <p>
+		 	<span class="alert-success">{{ Message }}</span>
+		 </p>
+		 {% else %}
+		 <p class="alert-danger">{{Message}}</p>
+		 <form action="." method="post">
+			 {{ form.as_p }}
+			 {% csrf_token %}
+ 			 <div class="row justify-content-center col-12">
+			 	<input type="submit" value="Save" class="btn btn-info col-4">
+			 </div>
+		 </form>
+	 {% endif %}
+	</div>
+</div>
+{% endblock %}

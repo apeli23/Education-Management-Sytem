@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block title %}{{ data.username }}{% endblock %}
+{% block content %}
+<div class="row card justify-content-start col-6 offset-3" style="margin-top:60px ">
+	<span class="text-center col-12 card-title"><h5>{{data.username}} DETAILS<h5></span>
+	<!-- principle details -->
+	<ul class="text-justify list-group card-text">
+		<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">First Name</span> : {{data.first_name}}</li>
+		<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Last Name</span> : {{data.last_name}}</li>
+		<!-- <li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Name</span> : {{data.username}}</li> -->
+		<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Tsc No.</span> : {{data.tsc | lower}}</li>
+		<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Tel No.</span> : {{data.telNo}}</li>
+		<li class="list-group-item"><span class="bg-primary badge-pill lighten-4">Email</span> : {{data.email | lower}}</li>
+	</ul>
+	<span class="card-footer row justify-content-center">
+		<a href="/principle/list/" class="btn btn-info">Close</a>
+	</span>
+</div>
+{% endblock %}

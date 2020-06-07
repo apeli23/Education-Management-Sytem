@@ -1,0 +1,50 @@
+{% extends "main/base.html" %}
+{% block title %}Schools{% endblock %}
+{% block content %}
+<div class="row justify-content-center" style="margin-top:60px">
+	{% if request.user.is_authenticated %}
+	
+	{% else %}
+	<div class="alert alert-light"><a href="#" class="btn btn-info" data-toggle="modal" data-target="#modalLoginForm">Log in</a>:To Access More Details</div>
+	{% endif %}
+	<table class="table table-hover card-block col-md-10 offset-1 table-striped table-bordered table-sm">
+		<thead class="thead-dark">
+			<th scope="col" >#</th>
+			<th scope="col">School</th>
+			<th scope="col">Knec</th>
+			<th scope="col">SubCounty</th>
+			<th scope="col">Category</th>
+			<th scope="col">Status</th>
+			<th scope="col">Type</th>
+			{% if request.user.is_authenticated %}
+			<th scope="col">Capacity</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Delete</th>
+			{% endif %}
+		</thead>
+		<tbody>
+		{% for school in data %}
+		<tr>
+			<th scope="row"><a href="/school/detail/{{school.id}}"></a>{{school.id}}</th>
+			<td><a style="text-decoration:None; color:black;" href="/school/detail/{{school.id}}">{{school.name}}</a></td>
+			<td>{{school.knecCode}}</td>
+			<td>{{school.subCounty}}</td>
+			<td>{{school.category}}</td>
+			<td>{{school.status}}</td>
+			<td>{{school.sType}}</td>
+			<!-- replace capacity new with capacity update -->
+			{% if request.user.is_authenticated %}
+			<td><a style="text-decoration:None; color:black;" href="/capacity/list/{{school.id}}"><span class="badge badge-dark">details</span></a></td>
+			<td><a style="text-decoration:None; color:black;" href="/school/edit/{{school.id}}"><span class="badge badge-warning">Edit</span></a></td>
+			<td><a style="text-decoration:None; color:black;" href="/school/delete/{{school.id}}"><span class="badge badge-danger">Delete</span></a></td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+</div>
+<div class="row justify-content-center col-12" style="bottom: 10px">
+	{% include "main/pagination.html" with page=data %}
+</div>
+{% endblock %}

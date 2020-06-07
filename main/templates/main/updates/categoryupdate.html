@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% block title %}{{data.name | lower}}{% endblock %}
+{% block content %}
+<div class="row card col-6 offset-3" style="margin-top:60px">
+	<form method="POST" action="/category/edit/{{data.id}}" novalidate>
+		{% csrf_token %}
+		<div class="card-header col-12 text-center">
+			{{data.name | upper}} EDIT
+		</div>
+		<p>
+			<input type="text" name="name" class="form-control" placeholder="Name" value="{{ data.name }}">
+		</p>
+		<div class="card-footer row justify-content-center col-12">
+			<button type="submit" class="btn btn-info col-5">Update</button>
+			<a class="btn btn-info col-5" href="/category/list/">Close</a>
+		</div>
+	</form>
+	
+</div>
+{% endblock %}

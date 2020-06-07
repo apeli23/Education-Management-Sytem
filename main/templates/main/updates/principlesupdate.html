@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+{% block title %}{{data.username | lower}}{% endblock %}
+{% block content %}
+<div class="row card col-6 offset-3" style="margin-top:60px">
+	<form method="POST" action="/principle/edit/{{data.id}}" novalidate>
+		{% csrf_token %}
+		<div class="card-header col-12 text-center">
+			{{data.username | upper}} EDIT
+		</div>
+		<p>
+			<input type="text" name="username" class="form-control disabled" placeholder="Username" value="{{ data.username }}">
+		</p>
+		<p>
+			<input type="text" name="tsc" class="form-control" placeholder="Tsc No." value="{{ data.tsc }}">
+		</p>
+		<p>
+			<input type="text" name="telNo" class="form-control " placeholder="Tell No." value="{{ data.telNo }}">
+		</p>
+		<p>
+			<input type="text" name="first_name" class="form-control " placeholder="First name" value="{{ data.first_name }}">
+		</p>
+		<p>
+			<input type="text" name="last_name" class="form-control " placeholder="Last name" value="{{ data.last_name }}">
+		</p>
+		<p>
+			<input type="text" name="email" class="form-control" placeholder="email" value="{{ data.email }}">
+		</p>
+		<div class="card-footer row justify-content-center col-12">
+			<button type="submit" class="btn btn-info col-5">Update</button>
+			<a class="btn btn-info col-5" href="/principle/list/">Close</a>
+		</div>
+	</form>
+	
+</div>
+{% endblock %}

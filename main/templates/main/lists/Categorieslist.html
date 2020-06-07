@@ -1,0 +1,32 @@
+{% extends "main/base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+<div class="row" style="margin-top:60px">
+	<table class="table table-hover card-block col-md-10 offset-1 table-striped table-bordered table-sm">
+		<thead class="thead-dark">
+			<th scope="col" >#</th>
+			<th scope="col">Name</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Delete</th>
+			<!-- <th scope="col">Update</th> -->
+			<!-- <th scope="col">Details</th> -->
+		</thead>
+		<tbody>
+		{% for ctr in data %}
+		<tr>
+			<th scope="row"><a href="/category/detail/{{ctr.id}}"></a>{{ctr.id}}</th>
+			<td>{{ctr.name}}</td>
+			<td><a href="/category/edit/{{ctr.id}}"><span class="badge badge-warning">Edit</span></a></td>
+			<!-- <td><a href="/category/detail/{{ctr.id}}">Update</a></td> -->
+			<td><a href="/category/delete/{{ctr.id}}"><span class="badge badge-danger">Delete</span></a></td>
+			<!-- <td><a href="/category/detail/{{ctr.id}}">Details</a></td> -->
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	<hr>
+	<div class="row justify-content-center col-12" style="bottom: 10px">
+		{% include "main/pagination.html" with page=data %}
+	</div>
+</div>
+{% endblock %}

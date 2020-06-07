@@ -1,0 +1,216 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="row col-12 justify-content-center" style="margin-top: 60px">
+	<canvas id="subschools" class="card col-6" style="margin-right: 20px" width="500" height="300"></canvas>
+	<canvas id="category" class="card col-5" width="500" height="360"></canvas>
+	<canvas id="subschoolstypes" class="card col-12" style="margin: 10px 0 40px 0" width="500" height="150"></canvas>
+	<!-- <canvas id="unknown" class="card col-5" style="margin-top: 10px" width="500" height="300"></canvas> -->
+</div>
+{% endblock %}
+
+{% block js%}
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var ctx = document.getElementById("subschools").getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'doughnut',
+	    data: {
+	        labels: {{ sub.labels | safe }},//["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        datasets: [{
+	            label: 'No of schools',
+	            data: {{ sub.values | safe }},//[12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+					'rgba(230, 25, 75)',
+					'rgba(60, 180, 75)',
+					'rgba(255, 225, 25)',
+					'rgba(0, 130, 200)',
+					'rgba(245, 130, 48)',
+					'rgba(145, 30, 180)',
+					'rgba(70, 240, 240)',
+					'rgba(240, 50, 230)',
+					'rgba(210, 245, 60)',
+					'rgba(250, 190, 190)',
+					'rgba(0, 128, 128)',
+					'rgba(230, 190, 255)',	                
+					'rgba(170, 110, 40)',
+					'rgba(255, 250, 200)',
+					'rgba(128, 0, 0)',
+					'rgba(170, 255, 195)',
+					'rgba(128, 128, 0)',
+					'rgba(255, 215, 180)',
+					'rgba(0, 0, 128)',
+					'rgba(128, 128, 128)',
+					'rgba(255, 255, 255)',
+					'rgba(0, 0, 0)',
+
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1,
+	        }]
+	    },
+	    options: {
+	        responsive:true
+	    }
+	});
+	var ctx2 = document.getElementById("subschoolstypes").getContext('2d');
+	var schooltypes = new Chart(ctx2, {
+	    type: 'line',
+	    data: {
+	        labels: {{ tp.labels | safe }},
+	        datasets: [{
+	            label: 'School types',
+	            data: {{ tp.values | safe }},
+	            backgroundColor: [			
+					'rgba(230, 25, 75)',
+					'rgba(60, 180, 75)',
+					'rgba(255, 225, 25)',
+					'rgba(0, 130, 200)',
+					'rgba(245, 130, 48)',
+					'rgba(145, 30, 180)',
+					'rgba(70, 240, 240)',
+					'rgba(240, 50, 230)',
+					'rgba(210, 245, 60)',
+					'rgba(250, 190, 190)',
+					'rgba(0, 128, 128)',
+					'rgba(230, 190, 255)',	                
+					'rgba(170, 110, 40)',
+					'rgba(255, 250, 200)',
+					'rgba(128, 0, 0)',
+					'rgba(170, 255, 195)',
+					'rgba(128, 128, 0)',
+					'rgba(255, 215, 180)',
+					'rgba(0, 0, 128)',
+					'rgba(128, 128, 128)',
+					'rgba(255, 255, 255)',
+					'rgba(0, 0, 0)',
+
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1,
+	        }]
+	    },
+	    scales: {
+	    	responsive:true
+            // yAxes: [{
+            //     ticks: {
+            //         beginAtZero:true
+            //     }
+            // }]
+        }
+	});
+	var ctx3 = document.getElementById("category").getContext('2d');
+	var myChart = new Chart(ctx3, {
+	    type: 'bar',
+	    data: {
+	        labels: {{ cat.labels | safe }},//["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        datasets: [{
+	            label: 'No of schools',
+	            data: {{ cat.values | safe }},//[12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+					'rgba(230, 25, 75)',
+					'rgba(60, 180, 75)',
+					'rgba(255, 225, 25)',
+					'rgba(0, 130, 200)',
+					'rgba(245, 130, 48)',
+					'rgba(145, 30, 180)',
+					'rgba(70, 240, 240)',
+					'rgba(240, 50, 230)',
+					'rgba(210, 245, 60)',
+					'rgba(250, 190, 190)',
+					'rgba(0, 128, 128)',
+					'rgba(230, 190, 255)',	                
+					'rgba(170, 110, 40)',
+					'rgba(255, 250, 200)',
+					'rgba(128, 0, 0)',
+					'rgba(170, 255, 195)',
+					'rgba(128, 128, 0)',
+					'rgba(255, 215, 180)',
+					'rgba(0, 0, 128)',
+					'rgba(128, 128, 128)',
+					'rgba(255, 255, 255)',
+					'rgba(0, 0, 0)',
+
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1,
+	        }]
+	    },
+	    options: {
+	        responsive:true
+	    }
+	});
+	// 	var ctx4 = document.getElementById("unknown").getContext('2d');
+	// var myChart = new Chart(ctx4, {
+	//     type: 'pie',
+	//     data: {
+	//         labels: {{ cat.labels | safe }},//["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	//         datasets: [{
+	//             label: 'No of schools',
+	//             data: {{ cat.values | safe }},//[12, 19, 3, 5, 2, 3],
+	//             backgroundColor: [
+	// 				'rgba(230, 25, 75)',
+	// 				'rgba(60, 180, 75)',
+	// 				'rgba(255, 225, 25)',
+	// 				'rgba(0, 130, 200)',
+	// 				'rgba(245, 130, 48)',
+	// 				'rgba(145, 30, 180)',
+	// 				'rgba(70, 240, 240)',
+	// 				'rgba(240, 50, 230)',
+	// 				'rgba(210, 245, 60)',
+	// 				'rgba(250, 190, 190)',
+	// 				'rgba(0, 128, 128)',
+	// 				'rgba(230, 190, 255)',	                
+	// 				'rgba(170, 110, 40)',
+	// 				'rgba(255, 250, 200)',
+	// 				'rgba(128, 0, 0)',
+	// 				'rgba(170, 255, 195)',
+	// 				'rgba(128, 128, 0)',
+	// 				'rgba(255, 215, 180)',
+	// 				'rgba(0, 0, 128)',
+	// 				'rgba(128, 128, 128)',
+	// 				'rgba(255, 255, 255)',
+	// 				'rgba(0, 0, 0)',
+
+	//             ],
+	//             borderColor: [
+	//                 'rgba(255,99,132,1)',
+	//                 'rgba(54, 162, 235, 1)',
+	//                 'rgba(255, 206, 86, 1)',
+	//                 'rgba(75, 192, 192, 1)',
+	//                 'rgba(153, 102, 255, 1)',
+	//                 'rgba(255, 159, 64, 1)'
+	//             ],
+	//             borderWidth: 1,
+	//         }]
+	//     },
+	//     options: {
+	//         responsive:true
+	//     }
+	// });
+
+});
+</script>
+
+{% endblock %}

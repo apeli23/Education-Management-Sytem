@@ -1,0 +1,85 @@
+{% extends "main/base.html" %}
+{% block title %}{{school.name | lower}}{% endblock %}
+{% block content %}
+<div class="row card col-6 offset-3" style="margin-top:60px">
+	<form method="POST" action="/school/edit/{{school.id}}" novalidate>
+		{% csrf_token %}
+		<div class="card-header col-12 text-center">
+			{{school.name | upper}} SCHOOL EDIT
+			
+		</div>
+		<p>
+			<input type="text" class="form-control" placeholder="School Name" name="name" value="{{school.name}}">
+		</p>
+		<p>
+			<input type="text" class="form-control" placeholder="Knec code" value="{{school.knecCode}}" name="knecCode">
+		</p>
+		<p>
+			<select name="principle" class="form-control" id="principle">
+				{% for prn in principles %}
+					{% if prn.id == school.principle.id %}
+						<option value='{{prn.id}}' selected>{{prn.username}}</option>
+					{% else %}
+						<option value='{{prn.id}}'>{{prn.username}}</option>
+					{% endif %}
+				{% endfor %}	
+			</select>
+		</p>
+		<p>
+			<select name="subCounty" class="form-control" id="subCounty">
+				{% for sub in subcounties %}
+					{% if sub.id == school.subCounty.id %}
+						<option value='{{sub.id}}' selected>{{sub.name}}</option>
+					{% else %}
+						<option value='{{sub.id}}'>{{sub.name}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</p>
+		<p>
+			<select name="category" class="form-control" id="category">
+				{% for category in categories %}
+					{% if category.id == school.category.id %}
+						<option value='{{category.id}}' selected>{{category.name}}</option>
+					{% else %}
+						<option value='{{category.id}}'>{{category.name}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</p>
+		<p>
+			<select name="status" class="form-control" id="status">
+				{% for status in statuses %}
+					{% if status.id == school.status.id %}
+						<option value='{{status.id}}' selected>{{status.name}}</option>
+					{% else %}
+						<option value='{{status.id}}'>{{status.name}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</p>
+		<p>
+			<select name="sType" class="form-control" id="sType">
+				{% for k,v in sTypes %}
+					{% if k == school.sType %}
+						<option value='{{k}}' selected>{{v}}</option>
+					{% else %}
+						<option value='{{k}}'>{{v}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</p>
+		<p>
+			<input type="text" name="streams" class="form-control" placeholder="streams" value="{{ school.streams }}">
+		</p>
+		<p>
+			<input type="text" name="enrollment" placeholder="enrollment" class="form-control" value="{{ school.enrollment }}">
+		</p>
+		<div class="card-footer row col-12 justify-content-center">
+			<button type="submit" class="btn btn-info col-5">Update</button>
+			<a class="btn btn-info col-5" href="/">Close</a>
+		</div>
+	</form>
+	
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
+<div class="row col-6 offset-3 card" style="margin-top:60px">
+	{# give the school details #}
+	<span class="card-header col-12 text-center">{{school.name | upper }}</span>
+	<table class="table table-hover card-block col-md-10 offset-1 table-striped table-bordered table-sm">
+		<thead class="thead-dark">
+			<th scope="col" >#</th>
+			<th scope="col">Year</th>
+			<th scope="col">gender</th>
+			<th scope="col">Number</th>
+			<th scope="col">Edit</th>
+			<th scope="col">Delete</th>
+		</thead>
+		<tbody>
+			{% for cpt in data %}
+				<tr>
+					<th scope="row">{{cpt.id}}</th>
+					<td>{{cpt.year}}</td>
+					<td>{{cpt.gender}}</td>
+					<td>{{cpt.amount}}</td>
+					<td><a href="/capacity/update/{{cpt.id}}"><span class="badge badge-warning">Edit</span></a></td>
+					<td><a href="/capacity/delete/{{cpt.id}}"><span class="badge badge-danger">Delete</span></a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="row justify-content-center col-12">
+		{% include "main/pagination.html" with page=data %}
+	</div>
+	<div class="card-footer row col-12 justify-content-center">
+		<a class="btn btn-info col-4" href="/">Close</a>
+		<a class="btn btn-info col-4" href="/capacity/new/">Add</a>
+	</div>
+</div>
+{% endblock %}
